@@ -1,3 +1,14 @@
+//  Raza Rauf
+//  TreeType.h
+//  Binary Tree project
+//
+//  Impements the TreeType class with data members and member functions
+//
+
+//  Please note that I developed this program using the Apple G++ compiler (LLVM version 6.1.0).
+//  The compiler does not allow me to have a separate header and implementation file when
+//  implementing a generic (template) type class.
+
 #include <iostream>
 #include <list>
 
@@ -17,7 +28,9 @@ template <class ItemType>
 class TreeType
 {
 public:
+    //Default class constructor
     TreeType();
+    //Default class destructor
     ~TreeType();
     void InsertItem(ItemType item);
     void FindNode(TreeNode* tree, ItemType item, TreeNode*& nodePtr, TreeNode*& parentPtr);
@@ -45,7 +58,8 @@ private:
     TreeNode* root;
 };
 
-#endif /* defined(____TreeType__) */
+#endif 
+/* defined(____TreeType__) */
 
 template <class ItemType>
 TreeType<ItemType>::TreeType()
@@ -56,14 +70,14 @@ TreeType<ItemType>::TreeType()
 
 template <class ItemType>
 TreeType<ItemType>::~TreeType()
-//Deconstructor
+//Destructor
 {
     Destroy(root);
 }
 
 template <class ItemType>
 void TreeType<ItemType>::Destroy(TreeNode*& tree)
-//Deconstructor helper
+//Destructor helper
 {
     if (tree != NULL)
     {
@@ -129,6 +143,7 @@ void TreeType<ItemType>::DeleteItem(ItemType item)
 
 template <class ItemType>
 void TreeType<ItemType>::Delete(TreeNode*& tree, ItemType item)
+//DeleteItem helper
 {
     if (item < tree->info)
         Delete(tree->left, item);
@@ -140,6 +155,7 @@ void TreeType<ItemType>::Delete(TreeNode*& tree, ItemType item)
 
 template <class ItemType>
 void TreeType<ItemType>::DeleteNode(TreeNode*& tree)
+//Delete helper
 {
     ItemType data;
     TreeNode* tempPtr;
@@ -166,7 +182,7 @@ void TreeType<ItemType>::GetPredecessor(TreeNode* tree, ItemType& data)
 
 template <class ItemType>
 bool TreeType<ItemType>::IsFull() const
-//Checks whether there is room to add another node
+//Checks whether there is enough memory to add another node
 {
     TreeNode* location;
     try
@@ -230,12 +246,14 @@ void TreeType<ItemType>::Retrieve(TreeNode* tree, ItemType& item, bool& found)
 
 template <class ItemType>
 ItemType TreeType<ItemType>::midNode()
+//Find the middle node of the Binary Tree structure
 {
     return midNodeHelp(root);
 }
 
 template <class ItemType>
 ItemType TreeType<ItemType>::midNodeHelp(TreeNode* tree)
+//midNode helper
 {
     list<ItemType> TreeList;
     OrderList(tree, TreeList);
@@ -265,13 +283,14 @@ void TreeType<ItemType>::OrderList(TreeNode* tree, list<ItemType>& TreeList)
 
 template <class ItemType>
 bool TreeType<ItemType>::SimilarTreesHelp(TreeType& t)
+//Determines whether the shapes of the trees are the same.
 {
     return SimilarTrees(root, t.root);
 }
 
 template <class ItemType>
 bool TreeType<ItemType>::SimilarTrees(TreeNode* tree1, TreeNode* tree2)
-//Determines whether the shapes of the trees are the same.
+//SimilarTreesHelp helper
 {
     ItemType numofnodes1=0;
     ItemType numofnodes2=0;
@@ -330,7 +349,7 @@ void TreeType<ItemType>:: showStructure () const
 
 template <class ItemType>
 void TreeType<ItemType>::showHelper (TreeNode *p, int level) const
-//Core of the showStructure function
+//showStructure function helper
 //Recursively outputs the tree structure
 {
     int j;   // Loop counter
